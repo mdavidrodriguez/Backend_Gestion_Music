@@ -7,6 +7,7 @@ const app = express()
 // Evitar error de origenes cruzados en el navegador
 app.use(cors())
 app.use(express.json())
+app.use(express.static("storage"))
 
 // Puerto de la app
 const port = process.env.PORT || 4000
