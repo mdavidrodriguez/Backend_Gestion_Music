@@ -2,11 +2,12 @@ const express = require("express")
 const { getItems, getItem, createItem, updateItem, deleteItem } = require("../controllers/tracks")
 const { validatorCreateItem, validatorgetItem } = require("../validators/tracks")
 const customHeader = require("../middleware/customheader")
+const authMiddleware = require("../middleware/session")
 const router = express.Router()
 
 // TODO http://localhost:tracks GET, POST, DELETE, PUT
 
-router.get('/', getItems);
+router.get('/', authMiddleware, getItems);
 
 router.post('/', validatorCreateItem, createItem);
 
