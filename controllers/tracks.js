@@ -34,14 +34,11 @@ const createItem = async (req, res) => {
 }
 const updateItem = async (req, res) => {
     try {
-        // De un objeto estamos creando dos objetos. Una con solo el id y el otro con toda la info
         const { id, ...body } = matchedData(req);
-        const data = await tracksModel.findOneAndUpdate({
-            id, body
-        })
-        res.send({ data })
-    } catch (e) {
-        handleHttpError(res, 'ERROR_UPDATE_ITEMS')
+        const data = await tracksModel.findByIdAndUpdate(id, body);
+        res.send({ data });
+    } catch (error) {
+        handleHttpError(res, "Registro Nose puedo actualizar");
     }
 
 }
