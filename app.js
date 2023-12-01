@@ -6,9 +6,15 @@ const app = express()
 
 // Evitar error de origenes cruzados en el navegador
 app.use(cors())
+app.use(express.json())
 
 // Puerto de la app
 const port = process.env.PORT || 4000
+
+
+// Invocamos a las rutas
+// TODO locahost/api/
+app.use("/api", require("./routes"))
 
 // Inicialización de la aplicación
 app.listen(port, () => {
