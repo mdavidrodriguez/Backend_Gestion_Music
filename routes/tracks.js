@@ -6,9 +6,9 @@ const router = express.Router()
 
 // TODO http://localhost:tracks GET, POST, DELETE, PUT
 
-router.get('/', customHeader, getItems);
+router.get('/', getItems);
 
-router.post('/', validatorCreateItem, customHeader, createItem);
+router.post('/', validatorCreateItem, createItem);
 
 
 module.exports = router
