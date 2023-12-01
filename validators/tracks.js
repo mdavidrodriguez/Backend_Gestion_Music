@@ -17,4 +17,9 @@ const validatorCreateItem = [
 
 ]
 
-module.exports = { validatorCreateItem }
+
+const validatorgetItem = [
+    check("id").exists().notEmpty().isMongoId(),
+    (req, res, next) => validateResults(req, res, next)
+]
+module.exports = { validatorCreateItem, validatorgetItem }

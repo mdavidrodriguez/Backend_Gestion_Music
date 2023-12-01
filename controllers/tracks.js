@@ -10,7 +10,15 @@ const getItems = async (req, res) => {
         handleHttpError(res, 'Error_get_Items')
     }
 }
-const getItem = (req, res) => {
+const getItem = async (req, res) => {
+    try {
+        req = matchedData(req);
+        const { id } = req;
+        const data = await tracksModel.findById(id)
+        res.send({ data });
+    } catch (e) {
+        handleHttpError(res, "Error_get_Item")
+    }
 
 }
 const createItem = async (req, res) => {
@@ -23,11 +31,28 @@ const createItem = async (req, res) => {
     }
 
 }
-const updateItem = (req, res) => {
+const updateItem = async (req, res) => {
+    try {
+        // De un objeto estamos creando dos objetos. Una con solo el id y el otro con toda la info
+        const { id, ...body } = matchedData(req);
+        const data = await tracksModel.findOneAndUpdate({
+            id, body
+        })
+        res.send({ data })
+    } catch (e) {
+        handleHttpError(res, 'ERROR_UPDATE_ITEMS')
+    }
 
 }
-const deleteItem = (req, res) => {
-
+const deleteItem = async (req, res) => {
+    try {
+        req = matchedData(req);
+        const { id } = req;
+        const data = await tracksModel.deleteOne({ _id: id })
+        res.send({ data });
+    } catch (e) {
+        handleHttpError(res, "Error_Delete_Item")
+    }
 }
 
 
